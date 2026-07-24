@@ -1,0 +1,7 @@
+services:
+  obsidian-link-combiner:
+    build: .
+    container_name: obsidian-link-combiner
+    ports:
+      - "5001:5000"
+    restart: unless-stopped
