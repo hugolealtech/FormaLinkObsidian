@@ -6,7 +6,9 @@ heading de nota, etc.) e gera o link final pronto pra abrir direto no ponto
 exato do material — seja um elemento do Excalidraw, uma página de PDF ou uma
 seção de nota.
 
-## Arquitetura  FormaLinkObsidian/
+## Arquitetura  
+
+FormaLinkObsidian/
 ├── app.py # Servidor Flask: rotas + lógica de parsing/combinação
 ├── templates/
 │ └── index.html # Formulário web (2 campos + resultado)
@@ -14,6 +16,7 @@ seção de nota.
 ├── Dockerfile # Empacota o app em imagem Python 3.12-slim
 ├── docker-compose.yml # Sobe o container com um único comando
 └── README.md  Fluxo interno (`app.py`):
+
 1. `parse_obsidian_link(link1)` → extrai `vault` e `file` (sem âncora) do
    link 1.
 2. `parse_navigation_fragment(link2)` → extrai tudo após o primeiro `#` do
