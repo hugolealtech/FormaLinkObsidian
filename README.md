@@ -11,7 +11,7 @@ docker build -t obsidian-link-combiner .
 docker run -p 5000:5000 obsidian-link-combiner
 ```
 
-Depois acesse: http://localhost:5000
+Depois acesse: http://localhost:5100
 
 ## Como usar
 
