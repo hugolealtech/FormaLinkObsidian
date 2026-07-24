@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Combinador de Links Obsidian</title>
+<style>
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    max-width: 640px;
+    margin: 40px auto;
+    padding: 0 16px;
+    background: #1e1e1e;
+    color: #e4e4e4;
+  }
+  h1 { font-size: 1.3rem; margin-bottom: 4px; }
+  p.subtitle { color: #9a9a9a; margin-top: 0; font-size: 0.9rem; }
+  label { display: block; margin-top: 18px; font-weight: 600; font-size: 0.9rem; }
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #2a2a2a;
+    color: #f0f0f0;
+    font-family: monospace;
+    font-size: 0.85rem;
+    resize: vertical;
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #7c3aed;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { background: #6d28d9; }
+  .result-box {
+    margin-top: 24px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #14261a;
+    border: 1px solid #2e7d32;
+  }
+  .error-box {
+    margin-top: 24px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #2a1414;
+    border: 1px solid #7d2e2e;
+  }
+  .result-link {
+    word-break: break-all;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #a5d6a7;
+  }
+  a.open-btn {
+    display: inline-block;
+    margin-top: 10px;
+    color: #a78bfa;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .copy-btn {
+    margin-top: 10px;
+    margin-left: 10px;
+    background: #333;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+</style>
+</head>
+<body>
+  <h1>Combinador de Links Obsidian</h1>
+  <p class="subtitle">Cole o link obsidian:// e o link/fragmento de navegação do elemento no Excalidraw.</p>
+
+  <form method="POST">
+    <label for="link1">Link 1 — obsidian://open?vault=...&file=...</label>
+    <textarea id="link1" name="link1" rows="3" placeholder="obsidian://open?vault=Forte_Acervo&file=01%20-%20Projects%2F...%2FAula2">{{ link1 }}</textarea>
+
+    <label for="link2">Link 2 — fragmento de navegação (não embed)</label>
+    <textarea id="link2" name="link2" rows="3" placeholder="[[.../Aula2#^area=ZcwQkHZy|100%]]">{{ link2 }}</textarea>
+
+    <button type="submit">Combinar</button>
+  </form>
+
+  {% if error %}
+  <div class="error-box">
+    <strong>Erro:</strong> {{ error }}
+  </div>
+  {% endif %}
+
+  {% if result %}
+  <div class="result-box">
+    <div><strong>Link final:</strong></div>
+    <div class="result-link" id="resultLink">{{ result }}</div>
+    <a class="open-btn" href="{{ result }}">Abrir no Obsidian →</a>
+    <button type="button" class="copy-btn" onclick="copyResult()">Copiar</button>
+  </div>
+  {% endif %}
+
+  <script>
+    function copyResult() {
+      const text = document.getElementById('resultLink').innerText;
+      navigator.clipboard.writeText(text);
+    }
+  </script>
+</body>
+</html>
